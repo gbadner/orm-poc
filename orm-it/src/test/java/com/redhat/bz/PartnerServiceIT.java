@@ -23,8 +23,6 @@ import java.util.logging.Logger;
 public class PartnerServiceIT extends AbstractIT {
     private static final Logger LOGGER = Logger.getLogger(PartnerServiceIT.class.getName());
 
-    @Inject
-    private PartnerService partnerService;
 
     @Inject
     private PartnerDAS partnerDAS;
