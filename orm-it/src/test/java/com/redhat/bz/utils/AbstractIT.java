@@ -11,9 +11,6 @@ import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 
-/**
- * @author spagop
- */
 public abstract class AbstractIT {
     protected static final String MYSQL_JDBC_DRIVER = Driver.class.getName();
 
