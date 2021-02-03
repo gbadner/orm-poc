@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://jboss.org/schema/arquillian"
+            xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+    <defaultProtocol type="Servlet 3.0"/>
+    <engine>
+        <property name="deploymentExportPath">target/</property>
+    </engine>
+
+    <container qualifier="wfly-managed" default="true">
+        <configuration>
+            <property name="jbossHome">${project.build.directory}/wildfly-${wildfly-dist.version}</property>
+            <property name="serverConfig">standalone.xml</property>
+            <!--property name="javaVmArguments">${container-java-vm-arguments}</property-->
+            <property name="javaVmArguments">-Xmx512m -XX:MaxPermSize=128m
+                -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n -Duser.timezone=Europe/Berlin -Djava.util.logging.manager=org.jboss.logmanager.LogManager
+            </property>
+            <property name="outputToConsole">${container-output-to-console}</property>
+            <property name="allowConnectingToRunningServer">true</property>
+        </configuration>
+    </container>
+
+    <extension qualifier="transaction">
+        <property name="manager">java:jboss/UserTransaction</property>
+    </extension>
+
+    <extension qualifier="persistence-dbunit">
+        <property name="schema">${persistence-dbunit-schema}</property>
+        <property name="datatypeFactory">org.dbunit.ext.mysql.MySqlDataTypeFactory</property>
+        <property name="metadataHandler">org.dbunit.ext.mysql.MySqlMetadataHandler</property>
+        <property name="caseSensitiveTableNames">false</property>
+    </extension>
+
+    <extension qualifier="persistence-script">
+        <property name="showSql">${persistence-script-showsql}</property>
+        <property name="sqlStatementDelimiter">;</property>
+    </extension>
+
+    <extension qualifier="persistence">
+        <property name="defaultDataSource">${jta-data-source}</property>
+        <property name="defaultCleanupPhase">NONE</property>
+        <property name="defaultDataSeedStrategy">ClEAN_INSERT</property>
+    </extension>
+
+</arquillian>

@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.redhat.bz</groupId>
+  <artifactId>orm-parent</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+
+  <modules>
+    <module>orm-rs</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <orm.java.version>11</orm.java.version>
+    <orm.version>1.0.0.GA</orm.version>
+    <maven.compiler.source>${orm.java.version}</maven.compiler.source>
+    <maven.compiler.target>${orm.java.version}</maven.compiler.target>
+    <!---
+        Maven plugin versions
+    -->
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+    <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
+    <maven-remote-resources-plugin.version>1.6.0</maven-remote-resources-plugin.version>
+    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+    <wildfly-maven-plugin.version>2.0.1.Final</wildfly-maven-plugin.version>
+    <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
+    <artemis.version>2.10.1</artemis.version>
+    <download-maven-plugin.version>1.4.1</download-maven-plugin.version>
+    <!--
+        Maven dependency versions
+    -->
+    <version.server.bom>17.0.1.Final</version.server.bom>
+    <javaee-api.version>8.0</javaee-api.version>
+    <jboss-ejb3-ext-api.version>2.3.0.Final</jboss-ejb3-ext-api.version>
+    <resteasy-jaxrs.version>3.11.0.Final</resteasy-jaxrs.version>
+    <jakarta.el.version>3.0.2</jakarta.el.version>
+    <jakarta.json>1.1.6</jakarta.json>
+    <jakarta.json-bind.version>1.0.2</jakarta.json-bind.version>
+    <jakarta.json-api.version>1.1.6</jakarta.json-api.version>
+    <money-api.version>1.0.3</money-api.version>
+    <moneta-core.version>1.3</moneta-core.version>
+    <hibernate-core.version>5.3.12.Final</hibernate-core.version>
+    <hibernate-validator.version>6.0.17.Final</hibernate-validator.version>
+    <slf4j-api.version>1.7.22</slf4j-api.version>
+    <braintree-java.version>2.108.0</braintree-java.version>
+    <!-- REPORTS  -->
+    <freemarker-version>2.3.30</freemarker-version>
+    <openpdf.version>1.3.14</openpdf.version>
+    <!--
+        Maven dependencies versions for junit tests
+    -->
+    <junit.version>4.13</junit.version>
+    <hamcrest-version>1.3</hamcrest-version>
+    <hamcrest-junit-version>2.0.0.0</hamcrest-junit-version>
+    <mockito-core.version>3.3.3</mockito-core.version>
+    <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+    <xmlunit-core.version>2.6.4</xmlunit-core.version>
+    <xmlunit-matchers.version>2.6.4</xmlunit-matchers.version>
+    <!--
+        Maven dependencies versions for integration tests
+    -->
+    <arquillian-bom.version>1.4.0.Final</arquillian-bom.version>
+    <shrinkwrap-resolver-bom.version>2.2.6</shrinkwrap-resolver-bom.version>
+    <mybatis-version>3.5.4</mybatis-version>
+    <arq-extension-persistence.version>1.0.0.Alpha7</arq-extension-persistence.version>
+    <maven-failsafe-plugin.version>2.22.1</maven-failsafe-plugin.version>
+    <dbunit.version>2.7.0</dbunit.version>
+    <rest-assured.version>4.3.0</rest-assured.version>
+    <org.wildfly.arquillian.version>2.2.0.Final</org.wildfly.arquillian.version>
+    <wildfly-dist.version>20.0.1.Final</wildfly-dist.version>
+    <subethasmtp.version>3.1.7</subethasmtp.version>
+    <!--
+        Maven dependencies versions for MySQL DB Java connectore
+    -->
+    <mysql-connector-java.version>5.1.48</mysql-connector-java.version>
+    <flyway.version>7.0.2</flyway.version>
+
+    <!-- Keycloak -->
+    <version.keycloak>11.0.0</version.keycloak>
+    <version.antrun.maven.plugin>1.8</version.antrun.maven.plugin>
+    <jboss-cli.executable>./jboss-cli.sh</jboss-cli.executable>
+    <!-- Jose4j -->
+    <jose4j.version>0.7.0</jose4j.version>
+
+    <versions-maven-plugin.version>2.5</versions-maven-plugin.version>
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.bitbucket.b_c</groupId>
+        <artifactId>jose4j</artifactId>
+        <version>${jose4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.money</groupId>
+        <artifactId>money-api</artifactId>
+        <version>${money-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.javamoney.moneta</groupId>
+        <artifactId>moneta-core</artifactId>
+        <version>${moneta-core.version}</version>
+      </dependency>
+      <!-- openpdf -->
+      <dependency>
+        <groupId>com.github.librepdf</groupId>
+        <artifactId>openpdf</artifactId>
+        <version>${openpdf.version}</version>
+      </dependency>
+      <!-- Freemarker template engine -->
+      <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>${freemarker-version}</version>
+      </dependency>
+      <!-- braintree payment com.braintreepayments.gateway -->
+      <dependency>
+        <groupId>com.braintreepayments.gateway</groupId>
+        <artifactId>braintree-java</artifactId>
+        <version>${braintree-java.version}</version>
+        <exclusions>
+          <!-- -->
+          <exclusion>
+            <groupId>com.fasterxml.jackson.jr</groupId>
+            <artifactId>jackson-jr-objects</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <!--
+          Maven dependencies for MySQL DB Connector-Java
+      -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector-java.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>${flyway.version}</version>
+      </dependency>
+      <!-- Already provided by the wildfly app server -->
+      <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-api</artifactId>
+        <version>8.0.0</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.microprofile.health</groupId>
+        <artifactId>microprofile-health-api</artifactId>
+        <version>2.2</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.microprofile.config</groupId>
+        <artifactId>microprofile-config-api</artifactId>
+        <version>1.4</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.ejb3</groupId>
+        <artifactId>jboss-ejb3-ext-api</artifactId>
+        <version>${jboss-ejb3-ext-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate-core.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- Only for testing -->
+      <!-- Maven dependencies for Tests -->
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-json-binding-provider</artifactId>
+        <version>${resteasy-jaxrs.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jaxrs</artifactId>
+        <version>${resteasy-jaxrs.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>jakarta.json</groupId>
+        <artifactId>jakarta.json-api</artifactId>
+        <scope>provided</scope>
+        <version>${jakarta.json-api.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>jakarta.json.bind</groupId>
+        <artifactId>jakarta.json.bind-api</artifactId>
+        <scope>provided</scope>
+        <version>${jakarta.json-bind.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>jakarta.json</artifactId>
+        <version>${jakarta.json}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- EL3 RI implementation -->
+      <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>jakarta.el</artifactId>
+        <version>${jakarta.el.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-all</artifactId>
+        <version>${hamcrest-version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-junit</artifactId>
+        <version>${hamcrest-junit-version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.dbunit</groupId>
+        <artifactId>dbunit</artifactId>
+        <version>${dbunit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>${mockito-core.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-core</artifactId>
+        <version>${xmlunit-core.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-matchers</artifactId>
+        <version>${xmlunit-matchers.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!--
+          Maven Arquillian dependencies for integration tests
+       -->
+
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>${arquillian-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.shrinkwrap.resolver</groupId>
+        <artifactId>shrinkwrap-resolver-bom</artifactId>
+        <version>${shrinkwrap-resolver-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wildfly.arquillian</groupId>
+        <artifactId>wildfly-arquillian-container-managed</artifactId>
+        <version>${org.wildfly.arquillian.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wildfly.arquillian</groupId>
+        <artifactId>wildfly-arquillian-common</artifactId>
+        <version>${org.wildfly.arquillian.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-persistence-api</artifactId>
+        <version>${arq-extension-persistence.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-persistence-core</artifactId>
+        <version>${arq-extension-persistence.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-persistence-spi</artifactId>
+        <version>${arq-extension-persistence.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-persistence-dbunit</artifactId>
+        <version>${arq-extension-persistence.version}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>
+              org.codehaus.jackson
+            </groupId>
+            <artifactId>
+              jackson-core-asl
+            </artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis-version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>${rest-assured.version}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <!-- SubEtha Mail is a J2EE-based mailing list manager -->
+      <dependency>
+        <groupId>org.subethamail</groupId>
+        <artifactId>subethasmtp</artifactId>
+        <version>${subethasmtp.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- Keycloak -->
+      <dependency>
+        <groupId>org.keycloak.bom</groupId>
+        <artifactId>keycloak-adapter-bom</artifactId>
+        <version>${version.keycloak}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.keycloak.bom</groupId>
+        <artifactId>keycloak-misc-bom</artifactId>
+        <version>${version.keycloak}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.keycloak.bom</groupId>
+        <artifactId>keycloak-spi-bom</artifactId>
+        <version>${version.keycloak}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.keycloak</groupId>
+        <artifactId>keycloak-authz-client</artifactId>
+        <version>${version.keycloak}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.zxing</groupId>
+        <artifactId>core</artifactId>
+        <version>3.4.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.zxing</groupId>
+        <artifactId>javase</artifactId>
+        <version>3.4.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse</groupId>
+        <artifactId>yasson</artifactId>
+        <version>1.0.7</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>28.2-jre</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!--
+      Profiles
+  -->
+  <profiles>
+
+
+
+    <!-- The Configuration of the integration-test profile -->
+    <profile>
+      <id>it</id>
+      <properties>
+        <attachClasses>true</attachClasses>
+        <!--
+            Only integration tests are run when the integration profile is active
+        -->
+        <skip.unit.tests>true</skip.unit.tests>
+        <skip.it.tests>false</skip.it.tests>
+        <failIfNoTests>false</failIfNoTests>
+        <jta-data-source>java:jboss/datasources/TEST_MYSQLDS</jta-data-source>
+        <hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
+        <hibernate.show_sql>true</hibernate.show_sql>
+        <hibernate.format_sql>true</hibernate.format_sql>
+        <persistence-dbunit-schema>testdb</persistence-dbunit-schema>
+        <mysql-driver-class>com.mysql.jdbc.Driver</mysql-driver-class>
+        <persistence-script-showsql>true</persistence-script-showsql>
+        <container-output-to-console>true</container-output-to-console>
+        <container-java-vm-arguments>-Xmx512m -XX:MaxPermSize=128m
+          -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=y
+        </container-java-vm-arguments>
+        <wildfly.modules.location>modules</wildfly.modules.location>
+        <env.OPENSHIFT_EXAMPLE_DATASOURCE>ExampleDS</env.OPENSHIFT_EXAMPLE_DATASOURCE>
+        <env.OPENSHIFT_DEFAULT_DATASOURCE>ExampleDS</env.OPENSHIFT_DEFAULT_DATASOURCE>
+
+
+
+        <env.MYSQL_SERVICE_HOST>192.168.99.100</env.MYSQL_SERVICE_HOST>
+
+
+        <env.MYSQL_SERVICE_PORT>3306</env.MYSQL_SERVICE_PORT>
+        <env.MYSQL_DATABASE>testdb</env.MYSQL_DATABASE>
+        <env.MYSQL_USER>user1</env.MYSQL_USER>
+        <env.MYSQL_PASSWORD>user1</env.MYSQL_PASSWORD>
+
+      </properties>
+      <modules>
+        <module>orm-it</module>
+      </modules>
+    </profile>
+  </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <source>${orm.java.version}</source>
+            <target>${orm.java.version}</target>
+            <showDeprecation>false</showDeprecation>
+            <showWarnings>false</showWarnings>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${maven-war-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>com.googlecode.maven-download-plugin</groupId>
+          <artifactId>download-maven-plugin</artifactId>
+          <version>${download-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+          <configuration>
+            <argLine>
+              --illegal-access=permit
+            </argLine>
+            <systemProperties>
+              <property>
+                <name>java.util.logging.manager</name>
+                <value>org.jboss.logmanager.LogManager</value>
+              </property>
+            </systemProperties>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${maven-failsafe-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.wildfly.plugins</groupId>
+          <artifactId>wildfly-maven-plugin</artifactId>
+          <version>${wildfly-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${build.helper.maven.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${versions-maven-plugin.version}</version>
+          <configuration>
+            <generateBackupPoms>false</generateBackupPoms>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <repositories>
+    <repository>
+      <id>apache.repos</id>
+      <url>https://repository.apache.org/content/groups/public</url>
+    </repository>
+  </repositories>
+</project>
