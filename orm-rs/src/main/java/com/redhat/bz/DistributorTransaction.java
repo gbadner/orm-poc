@@ -36,7 +36,7 @@ public class DistributorTransaction implements Serializable {
 
     @JsonbTransient
     @ManyToOne(targetEntity = DistributionIteration.class)
-    @JoinColumn(name = "DIST_ITERATION_ID", updatable = false, insertable = false, foreignKey = @ForeignKey(name = "FK_DIST_TRANS_ITERATION_ID"))
+    @JoinColumn(name = "DIST_ITERATION_ID", updatable = false, insertable = true, foreignKey = @ForeignKey(name = "FK_DIST_TRANS_ITERATION_ID"))
     private DistributionIteration distributionIteration;
 
 

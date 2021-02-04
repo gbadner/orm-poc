@@ -54,7 +54,7 @@ public class PartnerServiceIT extends AbstractIT {
 
         x = this.partnerDAS.update(x);
 
-        LOGGER.info("X: "+  x.toString());
+        //LOGGER.info("X: "+  x.toString());
     }
 
 }

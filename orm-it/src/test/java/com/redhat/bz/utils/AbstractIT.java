@@ -15,7 +15,7 @@ public abstract class AbstractIT {
     protected static final String MYSQL_JDBC_DRIVER = Driver.class.getName();
 
 
-    protected static final String JDBC_URL = "jdbc:mysql://192.168.99.100:3306/testdb";
+    protected static final String JDBC_URL = "jdbc:mysql://172.17.0.1:3306/testdb";
 
     protected static final String USER = "user1";
     protected static final String PASSWORD = "user1";
